@@ -38,7 +38,7 @@ fn main(){
             io::stdin().read_line(&mut id).expect("Failed to read line");
             let id: u32 = id.trim().parse().expect("Invalid input");
             if let Some(item)=todo.iter_mut().find(|item| item.id == id){
-
+                
                 item.completed = true;
                 println!("To-do item {} completed", id);
 
