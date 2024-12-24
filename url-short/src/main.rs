@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::sync::Mutex;
 use std::collections::HashMap;
 use nanoid::nanoid;
-
+use std::env;
 #[derive(Serialize, Deserialize)]
 struct Url {
     original: String,
@@ -58,6 +58,7 @@ async fn main() -> std::io::Result<()> {
     let shared_data = web::Data::new(AppState {
         urls: Mutex::new(HashMap::new()),
     });
+    let port = env::var("PORT").unwrap_or_else(|_| "8080".to_string());
     
     HttpServer::new(move || {
         App::new()
@@ -66,7 +67,7 @@ async fn main() -> std::io::Result<()> {
             .service(redirect)
             .service(index)
     })
-    .bind(("127.0.0.1", 8080))?
+    .bind(format!("0.0.0.0:{}", port))?
     .run()
     .await
 }
