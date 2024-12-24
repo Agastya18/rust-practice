@@ -25,7 +25,7 @@ async fn index()->impl Responder{
 
 }
 
-#[post("/shorten")]
+#[post("/api/shorten")]
 async fn shorten(data: web::Json<Url>, state: web::Data<AppState>) -> impl Responder {
     let original_url = data.original.clone();
     let id = nanoid!(4); // Generate a unique ID
