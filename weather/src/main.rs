@@ -1,4 +1,3 @@
-
 use std::io;
 use reqwest::blocking::get;
 use serde::Deserialize; 
@@ -13,7 +12,7 @@ struct WeatherResponse {
 #[derive(Deserialize)]
 struct Main {
     temp: f32,
-    pressure: u32,
+   
     humidity: u32,
 }
 
@@ -22,7 +21,9 @@ struct Main {
 struct Weather {
     description: String,
 }
+
 fn main() {
+   
   println!(" welcome to the weather application");
   let mut city = String::new();
 
@@ -34,6 +35,10 @@ fn main() {
   let url = format!("http://api.openweathermap.org/data/2.5/weather?q={},&appid={}&units=metric", city.trim(),api);
 
   let response:WeatherResponse =get(&url).expect("Failed to get response").json().expect("Failed to parse json");
+
+  // Log the response
+ // println!("{:?}", response);
+   
   println!(
     "{} in {}: {}°C, {}",
     response.weather[0].description.green(), // Colorize weather description in green
