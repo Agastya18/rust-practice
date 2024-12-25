@@ -29,7 +29,7 @@ async fn index()->impl Responder{
 async fn shorten(data: web::Json<Url>, state: web::Data<AppState>) -> impl Responder {
     let original_url = data.original.clone();
     let id = nanoid!(4); // Generate a unique ID
-    let shortened_url = format!("https://rust-practice.onrender.com/{}", id);
+    let shortened_url = format!("http://localhost:8080/{}", id);
 
     // Store the original URL with its shortened ID
     let mut urls = state.urls.lock().unwrap();
